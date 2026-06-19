@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+
+  <div class="weather-container">
+
+    <!-- Search -->
+    <div class="search-box">
+      <input type="text" id="cityInput" placeholder="Search city...">
+      <button id="searchBtn">
+        <i data-feather="search"></i>
+      </button>
+    </div>
+
+    <!-- Weather Card -->
+    <div class="weather-card">
+
+      <div class="weather-icon">☀️</div>
+
+      <h1 id="cityName">Cairo</h1>
+
+      <h2 id="temperature">--°C</h2>
+
+      <p id="condition">Search for weather</p>
+
+      <div class="weather-details">
+
+        <div class="detail-card">
+          <i data-feather="droplet"></i>
+          <span>Humidity</span>
+          <strong id="humidity">--%</strong>
+        </div>
+
+        <div class="detail-card">
+          <i data-feather="wind"></i>
+          <span>Wind</span>
+          <strong id="wind">-- km/h</strong>
+        </div>
+
+      </div>
+
+      <!-- Loading / Error -->
+      <div id="status"></div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
