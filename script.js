@@ -7,17 +7,38 @@ const condition = document.getElementById("condition");
 const humidity = document.getElementById("humidity");
 const wind = document.getElementById("wind");
 const icon = document.querySelector(".weather-icon");
+const statusEl = document.getElementById("status");
+
+const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000/weather"
+    : "/weather";
 
 async function getWeather() {
   const city = cityInput.value.trim();
 
   if (!city) {
-    alert("Please enter a city name");
+    statusEl.className = "error";
+    statusEl.textContent = "Please enter a city name";
     return;
   }
 
   try {
-    const res = await fetch(`http://localhost:3000/weather?city=${city}`);
+    statusEl.className = "loading";
+    statusEl.textContent = "Loading...";
+
+    const res = await fetch(
+      `${API_URL}?city=${encodeURIComponent(city)}`
+    );
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+
+      throw new Error(
+        errorData.error || `HTTP Error: ${res.status}`
+      );
+    }
+
     const data = await res.json();
 
     cityName.textContent = data.name;
@@ -34,11 +55,14 @@ async function getWeather() {
     else if (weatherMain.includes("snow")) icon.textContent = "❄️";
     else icon.textContent = "🌤️";
 
-    cityInput.value = "";
+    statusEl.textContent = "";
+    statusEl.className = "";
 
+    cityInput.value = "";
   } catch (error) {
-    alert("Error fetching weather data");
-    console.log(error);
+    statusEl.className = "error";
+    statusEl.textContent = error.message;
+    console.error(error);
   }
 }
 

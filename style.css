@@ -121,15 +121,18 @@ body {
 #status {
   margin-top: 15px;
   font-size: 14px;
-  color: #93c5fd;
+  min-height: 20px;
 }
 
 .loading {
+  color: #93c5fd;
   animation: blink 1s infinite;
 }
 
 @keyframes blink {
-  50% { opacity: 0.5; }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .error {
